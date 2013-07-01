@@ -63,7 +63,7 @@ if(isset($val['fields'])){
       <td> <input type="text" name="fields[<?=$i?>][label]" value="<?=$l['label']?>" /> </td> 
       <td>
         <select name="fields[<?=$i?>][model]" class="input-type"  > 
-         <?foreach($option as $k=>$v){?>  <option value="<?=$k?>" <?=$l['model']==$k?'selected="TRUE"':''?>><?=$v?></option> <?}?>
+         <?php foreach($option as $k=>$v){?>  <option value="<?=$k?>" <?=$l['model']==$k?'selected="TRUE"':''?>><?=$v?></option> <?php }?>
         </select>
         <textarea <?=($l['model']=='radio'||$l['model']=='checkbox')?'':'style="display:none;"'?> class="input-ename"  name="fields[<?=$i?>][enum]" ><?=isset($l['enum'])?$l['enum']:"选项1\n选项2\n选项3"?></textarea> 
       </td> 
@@ -71,7 +71,7 @@ if(isset($val['fields'])){
       <td> <a onclick="$(this).parent().parent().remove();" title="删除" ><img src="<?=BASE?>static/img/b_drop.png"/></a></td>
      </tr>
       <?php }}?>
-      <?for($j=$i+1;$j<$i+8;$j++):?>
+      <?php for($j=$i+1;$j<$i+8;$j++):?>
     <tr <?=($j%2)?'':' class="odd"'?> >
           <td></td>
           <td>
@@ -83,7 +83,7 @@ if(isset($val['fields'])){
           <td>
 
             <select name="fields[<?=$j?>][model]" class="input-type" >
-              <?foreach($option as $k=>$v){?> <option value="<?=$k?>" ><?=$v?></option> <?}?> 
+              <?php foreach($option as $k=>$v){?> <option value="<?=$k?>" ><?=$v?></option> <?php }?> 
             </select>
  
      <textarea style="display:none;" name="fields[<?=$j?>][enum]" class="input-ename"  >选项1

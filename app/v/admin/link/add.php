@@ -24,7 +24,7 @@
           <td> <input type="text" name="info[<?=$i?>][label]" value="<?=$l['label']?>" /> </td> 
           <td> <input type="text" size="30" name="info[<?=$i?>][link]" value="<?=isset($l['link'])?$l['link']:''?>"  /></td> 
           <td> <input type="text" size="4" name="info[<?=$i?>][order]" value="<?=intval($l['order'])?$l['order']:''?>"  /></td> 
-          <td> <input name="info[<?=$i?>][blank]" value="1" type="checkbox" <?=intval($l['blank'])?'checked="TRUE"':''?> /></td>
+          <td> <input name="info[<?=$i?>][blank]" value="1" type="checkbox" <?=(isset($l['blank']) && intval($l['blank']))?'checked="TRUE"':''?> /></td>
          <td> <a onclick="$(this).parent().parent().remove();" >删</a></td>
          </tr>
       <?php }}?>

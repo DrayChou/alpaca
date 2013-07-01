@@ -215,7 +215,7 @@ onUploadCallback=function(sText,bFinish,fromfile)
      <select name="info[child_model]">
         <?php foreach($model as $v){?>
           <option value="<?=$v['id']?>" <?=isset($val['info']['child_model']) && $val['info']['child_model']==$v['id']?' selected ':''?>><?=$v['title']?></option>
-        <?}?>
+        <?php }?>
       </select>  
       </li>
      </ul> 
