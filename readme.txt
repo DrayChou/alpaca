@@ -1,3 +1,9 @@
+基于 AlpacaCMS 羊驼  修改
+
+1. 整理代码
+2. 增加 sae 兼容部分
+
+
 AlpacaCMS 羊驼  
 官网 http://alpaca.b24.cn 
 
