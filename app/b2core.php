@@ -291,7 +291,7 @@ class db_mysql {
     }
 
     function escape($str) {
-        return mysql_escape_string($str);
+        return mysql_real_escape_string($str);
     }
 
 }
