@@ -1,14 +1,17 @@
 <?php
 
-class page extends admin {
+class page extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/elem_m');
         $this->submenu = array('index' => '内容', 'link' => '菜单');
     }
 
-    function index($rel_id = 0) {
+    function index($rel_id = 0)
+    {
         if (isset($_POST['order_by'])) {
             foreach ($_POST['order_by'] as $k => $v) {
                 $this->m->update($k, array('order_by' => $v));
@@ -25,7 +28,8 @@ class page extends admin {
         $this->display('v/admin/page/list-table', $param);
     }
 
-    function add($rel_id = 0) {
+    function add($rel_id = 0)
+    {
         $conf = array('title' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {
@@ -46,8 +50,7 @@ class page extends admin {
             if ($_POST['mod'] == 'dir')
                 $this->cachedir();
             redirect(ADMIN_BASE . 'page/index/' . $rel_id . '/', '发布成功！');
-        }
-        else {
+        } else {
             $val = array();
             if ($rel_id) {
                 $parent = $this->m->get($rel_id);
@@ -88,7 +91,8 @@ class page extends admin {
         }
     }
 
-    function edit($id) {
+    function edit($id)
+    {
         $conf = array('title' => 'required');
         //,'mod'=>'required','rel_id'=>'required','elem_name'=>'required','elem_info'=>'required','elem_info'=>'required','post_time'=>'required','update_time'=>'required','user_id'=>'required','user_name'=>'required','order_by'=>'required',);
         $err = validate($conf);
@@ -142,7 +146,8 @@ class page extends admin {
         }
     }
 
-    function mdel() {
+    function mdel()
+    {
         $_POST['sid'][] = 0;
         $ids = implode(',', $_POST['sid']);
         $this->m->db->query("delete from elem where id in ($ids)");
@@ -150,7 +155,8 @@ class page extends admin {
         echo '1';
     }
 
-    function move($rel_id = 0) {
+    function move($rel_id = 0)
+    {
         $_POST['sid'][] = 0;
         $ids = implode(',', $_POST['sid']);
         $this->m->db->query("update elem set rel_id = '$rel_id' where id in ($ids)");
@@ -158,7 +164,8 @@ class page extends admin {
         echo '1';
     }
 
-    function cachedir() {
+    function cachedir()
+    {
         $r = load('m/elem_m')->get(" and `mod` = 'dir'");
         foreach ($r as $e) {
             $id = $e['id'];
@@ -188,11 +195,14 @@ class page extends admin {
 
     /* 菜单链接 */
 
-    function link($action = 'index', $id = 0) {
+    function link($action = 'index', $id = 0)
+    {
         switch ($action) {
-            case 'add': $this->link_add();
+            case 'add':
+                $this->link_add();
                 return;
-            case 'edit': $this->link_edit($id);
+            case 'edit':
+                $this->link_edit($id);
                 return;
         }
         $tot = $this->m->count(" and `mod`='link'   ");
@@ -204,7 +214,8 @@ class page extends admin {
         $this->display('v/admin/link/list-table', $param);
     }
 
-    function link_add() {
+    function link_add()
+    {
         $conf = array('elem_name' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {
@@ -220,7 +231,8 @@ class page extends admin {
         }
     }
 
-    function link_edit($id) {
+    function link_edit($id)
+    {
         $conf = array('elem_name' => 'required');
         $err = validate($conf);
         if (is_array($err)) {
@@ -238,7 +250,8 @@ class page extends admin {
         redirect(BASE . 'admin/page/link/', '修改成功！');
     }
 
-    function arrange($arr) {
+    function arrange($arr)
+    {
         // clear empty fields
         $narr = array();
         foreach ($arr as $a) {
@@ -261,7 +274,8 @@ class page extends admin {
         return $arr;
     }
 
-    function tag($val, $id) {
+    function tag($val, $id)
+    {
 
         $id = trim($id);
         $this->m->del_by_rel($id, 'tag');
@@ -283,7 +297,8 @@ class page extends admin {
 
 }
 
-function admin_breadcrumb($id = 'current') {
+function admin_breadcrumb($id = 'current')
+{
     global $pid;
     $c = '';
     if ($id == 'current')
@@ -296,7 +311,8 @@ function admin_breadcrumb($id = 'current') {
     return admin_breadcrumb($r['rel_id']) . $c;
 }
 
-function list2tree($id, $tree, $prefix = '──') {
+function list2tree($id, $tree, $prefix = '──')
+{
     if (!isset($tree[$id]))
         return;
     foreach ($tree[$id] as $li) {

@@ -1,12 +1,15 @@
 <?php
 
-class home extends base {
+class home extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function index() {
+    function index()
+    {
         global $db_config;
         if (!isset($db_config)) {
             $this->install();
@@ -15,7 +18,8 @@ class home extends base {
         load('c/page')->view();
     }
 
-    private function install() {
+    private function install()
+    {
         global $db_config;
         if (is_array($db_config))
             redirect("/");
@@ -47,21 +51,22 @@ $db_config = array(
         }
     }
 
-    function test() {
+    function test()
+    {
         $stor = new SaeStorage();
         $upload_domain = "s02";
 
         echo "<pre>";
 
         $kv = new SaeKV();
- 
+
         // 初始化SaeKV对象
         $ret = $kv->init();
         var_dump($ret);
         $ret = $kv->pkrget('', 100);
         var_dump($ret);
 
-        file_put_contents('saekv://testsaekv', chr(0xEF).chr(0xBB).chr(0xBF)."test");
+        file_put_contents('saekv://testsaekv', chr(0xEF) . chr(0xBB) . chr(0xBF) . "test");
         var_dump(file_get_contents('saekv://testsaekv'));
 
         // 更新key-value

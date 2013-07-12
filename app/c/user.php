@@ -1,13 +1,16 @@
 <?php
 
-class user extends base {
+class user extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/user_m');
     }
 
-    function reg() {
+    function reg()
+    {
         $conf = array('email' => 'required|val_dist_email', 'username' => 'required|val_dist_username', 'password' => 'required');
 
         $err = validate($conf);
@@ -24,7 +27,8 @@ class user extends base {
         }
     }
 
-    function login() {
+    function login()
+    {
         $rtu = isset($_GET['rtu']) ? $_GET['rtu'] : '/';
         $conf = array('username' => 'required', 'password' => 'required');
         $err = validate($conf);
@@ -44,7 +48,8 @@ class user extends base {
         redirect('./?rtu=' . $rtu, $this->m->login_err);
     }
 
-    function logout() {
+    function logout()
+    {
         $this->m->logout();
         redirect(BASE, '退出登录！');
     }

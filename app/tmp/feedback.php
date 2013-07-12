@@ -2,6 +2,7 @@
     <h1>
         <?= $title ?>
     </h1>
+
     <form id="purchase-form" class="purchase-form" method="POST" action="<?= BASE ?>freeform/index/留言板/">
         <div class="basic">
             <div class="tr fd-clr">
@@ -9,7 +10,9 @@
                     产品名称 <b>*</b>
                 </div>
                 <div class="value offername-value">
-                    <input type="text" maxlength="30" placeholder="如:采购USB2.0连接插座" class="text shadow" data-name="offerName" value="" name="货物名称">
+                    <input type="text" maxlength="30" placeholder="如:采购USB2.0连接插座" class="text shadow"
+                           data-name="offerName" value="" name="货物名称">
+
                     <div id="offername-tip" class="highlight offername-tip">
                         <p>如:采购USB2.0连接插座</p>
                         <span class="left-arrow"></span>
@@ -21,8 +24,10 @@
                     采购数量 <b>*</b>
                 </div>
                 <div class="value">
-                    <input type="text" placeholder="数量" data-name="amount" class="text amount shadow" value="" name="数量">
-                    <input type="text" maxlength="10" placeholder="单位" data-name="unit" class="text unit shadow" value="" name="单位">
+                    <input type="text" placeholder="数量" data-name="amount" class="text amount shadow" value=""
+                           name="数量">
+                    <input type="text" maxlength="10" placeholder="单位" data-name="unit" class="text unit shadow"
+                           value="" name="单位">
                 </div>
             </div>
             <div class="tr fd-clr">
@@ -47,9 +52,11 @@
                 </div>
                 <div class="value">
                     <div class="fd-clr" id="common-word">
-                        <span data-process-monitor="app=bing&amp;page_type=post&amp;source=winport&amp;action=common&amp;buyerID=" style="float:left;" class="btn btn1"></span>
+                        <span
+                            data-process-monitor="app=bing&amp;page_type=post&amp;source=winport&amp;action=common&amp;buyerID="
+                            style="float:left;" class="btn btn1"></span>
                         <span class="btn btn2"></span>
-                        <select name="主题" >
+                        <select name="主题">
                             <option>紧急采购！</option>
                             <option>请报实价</option>
                             <option>请速传真报价</option>
@@ -95,7 +102,7 @@
             <div class="value">
                 <ul>
                     <li class="btn fd-clr">
-                        <input type="submit" value="保存并发送" >
+                        <input type="submit" value="保存并发送">
                     </li>
                 </ul>
             </div>

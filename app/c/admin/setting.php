@@ -1,14 +1,17 @@
 <?php
 
-class setting extends admin {
+class setting extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/elem_m');
         $this->submenu = array('index' => '网站设置', 'cleancache' => '清空缓存', 'backup' => '备份管理');
     }
 
-    function index() {
+    function index()
+    {
         $param['config'] = array('site_title' => '网站名称', 'slogon' => '网站小标题', 'logo_url' => 'logo地址',
             'default_user_level' => '默认注册用户级别', 'icp' => 'icp备案', 'cache_time' => '缓存时间(关闭为0)');
         $setting = $param['setting'] = $this->m->setting();
@@ -22,12 +25,14 @@ class setting extends admin {
         $this->display('v/admin/setting/add', $param);
     }
 
-    function cleancache() {
+    function cleancache()
+    {
         cache_clean();
         load('c/admin/page')->cachedir();
     }
 
-    function backup($action = '', $file = '') {
+    function backup($action = '', $file = '')
+    {
         switch ($action) {
             case 'create':
                 $this->backup_create();
@@ -73,10 +78,11 @@ class setting extends admin {
         $this->display('v/admin/setting/backup', $param);
     }
 
-    function backup_create() {
+    function backup_create()
+    {
         if (APP_SERVER == 'sae') {
 
-            header('$charset=utf-8'); 
+            header('$charset=utf-8');
             $date = date('YmdHis');
             $dj = new SaeDeferredJob();
             $task_id = $dj->addTask("export", "mysql", "s02", "db/{$date}.sql.zip", SAE_MYSQL_DB, "", "");
@@ -137,10 +143,11 @@ class setting extends admin {
         }
     }
 
-    function backup_restore($file) {
+    function backup_restore($file)
+    {
         if (APP_SERVER == 'sae') {
 
-            header('$charset=utf-8'); 
+            header('$charset=utf-8');
             $date = date('YmdHis');
             $dj = new SaeDeferredJob();
             $task_id = $dj->addTask("import", "mysql", "s02", "db/{$file}", SAE_MYSQL_DB, "", "");
@@ -200,14 +207,15 @@ class setting extends admin {
         }
     }
 
-    function backup_del($file) {
+    function backup_del($file)
+    {
         if (APP_SERVER == 'sae') {
 
             //初始化SAE组件
             $stor = new SaeStorage();
             $base_dir = "db/";
 
-            header('$charset=utf-8'); 
+            header('$charset=utf-8');
             if ($stor->delete(SAE_STORAGE_DOMAIN, $base_dir . $file) == false) {
                 redirect('../../', $base_dir . $file . '删除失败。。。');
             }

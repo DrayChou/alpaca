@@ -1,5 +1,4 @@
-
-<table class="table-view  table" cellspacing=0 >
+<table class="table-view  table" cellspacing=0>
     <tr>
         <th>标题</th>
         <td><?= $r[title] ?></td>

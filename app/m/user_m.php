@@ -1,8 +1,10 @@
 <?php
 
-class user_m extends m {
+class user_m extends m
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->table = 'user';
         $this->fields = array('email', 'username', 'password', 'post_time', 'update_time', 'level', 'info');
@@ -10,7 +12,8 @@ class user_m extends m {
         $this->login_err = '';
     }
 
-    function add_user($elem = FALSE) {
+    function add_user($elem = FALSE)
+    {
         $query_list = array();
         if (!$elem)
             $elem = $_POST;
@@ -20,7 +23,8 @@ class user_m extends m {
         $this->add($elem);
     }
 
-    function update_user($id, $elem = FALSE) {
+    function update_user($id, $elem = FALSE)
+    {
         $query_list = array();
         if (!$elem)
             $elem = $_POST;
@@ -30,11 +34,13 @@ class user_m extends m {
         $this->update($id, $elem);
     }
 
-    private function encode($string) {
+    private function encode($string)
+    {
         return md5($string);
     }
 
-    function login($username, $password) {
+    function login($username, $password)
+    {
         $username = addslashes($username);
         $user = $this->db->query("select * from user where LOWER(username)=lower('$username')");
         if (!isset($user[0])) {
@@ -60,7 +66,8 @@ class user_m extends m {
         return TRUE;
     }
 
-    function check() {
+    function check()
+    {
         if (isset($_COOKIE[$this->auth])) {
             $u = unserialize($_COOKIE[$this->auth]);
             if (md5(SEED . $u['id'] . $u['level'] == $u['seed'])) {
@@ -70,7 +77,8 @@ class user_m extends m {
         return array('id' => 0, 'level' => 0);
     }
 
-    function logout() {
+    function logout()
+    {
         setcookie($this->auth, '', time() - 36000, "/");
     }
 
@@ -78,7 +86,8 @@ class user_m extends m {
 
 /* validate functions */
 
-function val_dist_email($email) {
+function val_dist_email($email)
+{
     $email = addslashes($email);
     $user = load('m/user_m')->get(" and lower(email) = lower('$email') ");
     if (isset($user[0]))
@@ -86,7 +95,8 @@ function val_dist_email($email) {
     return true;
 }
 
-function val_dist_username($username) {
+function val_dist_username($username)
+{
     $username = addslashes($username);
     $user = load('m/user_m')->get(" and lower(username) = lower('$username') ");
     if (isset($user[0]))

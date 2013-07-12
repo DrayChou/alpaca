@@ -1,12 +1,12 @@
-<form method="POST" >
-    <input type="hidden" name="mod" value="page" >
-    <input type="hidden" name="info[model]" value="<?= isset($val['info']['model']) ? $val['info']['model'] : '' ?>" >
-    <table class="table-add table" cellspacing=0 >
+<form method="POST">
+    <input type="hidden" name="mod" value="page">
+    <input type="hidden" name="info[model]" value="<?= isset($val['info']['model']) ? $val['info']['model'] : '' ?>">
+    <table class="table-add table" cellspacing=0>
         <tr>
             <th><?= $cur_mod['title_label'] ?></th>
             <td>
-                <input type="text" name="title" value="<?= isset($val['title']) ? $val['title'] : '' ?>" size="40" > 
-                <span class="error" ><?= isset($err['title']) ? $err['title'] : '' ?></span>
+                <input type="text" name="title" value="<?= isset($val['title']) ? $val['title'] : '' ?>" size="40">
+                <span class="error"><?= isset($err['title']) ? $err['title'] : '' ?></span>
             </td>
             <td>
             </td>
@@ -50,10 +50,12 @@
                     <td>
                     </td>
                 </tr>
-            <?php }
+            <?php
+            }
         } ?>
         <tr>
-            <th></th><td><input type="submit" class="submit-button" value="确认提交" ></td>
+            <th></th>
+            <td><input type="submit" class="submit-button" value="确认提交"></td>
         </tr>
     </table>
 </form>

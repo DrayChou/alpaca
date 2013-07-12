@@ -1,13 +1,16 @@
 <?php
 
-class page extends base {
+class page extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/elem_m');
     }
 
-    function view($url = 'home', $action = 'view') {
+    function view($url = 'home', $action = 'view')
+    {
         global $rel_id, $pid;
         cache_start(alpa('cache_time'));
         $page = $this->m->gname($url, true);
@@ -85,7 +88,8 @@ class page extends base {
             cache_end();
     }
 
-    function tag($url = 'home') {
+    function tag($url = 'home')
+    {
         global $rel_id, $pid;
         cache_start(alpa('cache_time'));
         $dir = alpa('dir');
@@ -124,7 +128,8 @@ class page extends base {
 
     /* extends functions  */
 
-    function add($rel_id = 0) {
+    function add($rel_id = 0)
+    {
         if (!$rel_id)
             redirect('/', '对不起，您没有权限');
         $parent = $this->m->get($rel_id);

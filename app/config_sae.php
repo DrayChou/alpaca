@@ -16,18 +16,19 @@ $db_config = array(
     'default_db' => SAE_MYSQL_DB
 );
 
-function sae_file( $file, $include = false ) {
+function sae_file($file, $include = false)
+{
     $temp = @file_get_contents('saekv://' . $view . '.php');
-    if( !empty($temp) ){
-        if($include){
+    if (!empty($temp)) {
+        if ($include) {
             @include 'saekv://' . $view . '.php';
         }
     } else {
         $temp = @file_get_contents('saestor://' . SAE_STORAGE_DOMAIN . '/' . $view . '.php');
-        if( !empty($temp) ){
+        if (!empty($temp)) {
             file_put_contents('saekv://' . $view, $temp);
 
-            if($include){
+            if ($include) {
                 @include 'saestor://' . SAE_STORAGE_DOMAIN . '/' . $view . '.php';
             }
         }

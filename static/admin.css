@@ -1,6 +1,8 @@
-@import url(alpa.css);/* 自定义样式 */
+@import url(alpa.css);
+
+/* 自定义样式 */
 body {
-    font: normal 14px/25px Consolas,Monaco,monospace;
+    font: normal 14px/25px Consolas, Monaco, monospace;
     color: #444;
 }
 
@@ -30,7 +32,7 @@ a:hover {
     color: #fff;
 }
 
-#menu li,#submenu li {
+#menu li, #submenu li {
     float: left;
     list-style: none;
     margin: 0 5px;
@@ -41,8 +43,8 @@ a:hover {
     height: 30px;
     background: #f6f6f6;
     border-bottom: solid 3px #ddd;
-    background-image: linear-gradient(center top , #F9F9F9, #eee);
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #eee);
+    background-image: linear-gradient(center top, #F9F9F9, #eee);
+    background-image: -moz-linear-gradient(center top, #F9F9F9, #eee);
 }
 
 #submenu li {
@@ -85,7 +87,7 @@ a:hover {
     width: 960px;
 }
 
-th,td {
+th, td {
     padding: 5px 10px;
     border-bottom: solid 1px #eee;
 }
@@ -103,8 +105,8 @@ tr.th {
     padding: 0 5px;
     font: normal 14px/26px arial;
     background-color: #F1F1F1;
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
-    background-image: linear-gradient(center top , #F9F9F9, #ECECEC);
+    background-image: -moz-linear-gradient(center top, #F9F9F9, #ECECEC);
+    background-image: linear-gradient(center top, #F9F9F9, #ECECEC);
 }
 
 tr.odd {
@@ -123,7 +125,7 @@ table {
     float: right;
 }
 
-b,strong {
+b, strong {
     font-weight: bold;
 }
 
@@ -288,8 +290,8 @@ input[type=submit] {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     background-color: #F1F1F1;
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #ECECEC);
-    background-image: linear-gradient(center top , #F9F9F9, #ECECEC);
+    background-image: -moz-linear-gradient(center top, #F9F9F9, #ECECEC);
+    background-image: linear-gradient(center top, #F9F9F9, #ECECEC);
 }
 
 .sidebar .box {
@@ -297,8 +299,8 @@ input[type=submit] {
     padding: 10px;
     margin-bottom: 10px;
     background-color: #F5F5F5;
-    background-image: -moz-linear-gradient(center top , #F9F9F9, #F5F5F5);
-    background-image: linear-gradient(center top , #F9F9F9, #F5F5F5);
+    background-image: -moz-linear-gradient(center top, #F9F9F9, #F5F5F5);
+    background-image: linear-gradient(center top, #F9F9F9, #F5F5F5);
 }
 
 .sidebar input {

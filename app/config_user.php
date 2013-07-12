@@ -15,24 +15,30 @@ $db_config = array(
 
 
 //覆盖 SAE 相关的方法
-function sae_file( $file, $include = false ) {
+function sae_file($file, $include = false)
+{
     return false;
 }
 
-class saebase {
-    public function __call($fun, $args) {  //第一次参数是方法名，第二个参数是传过来的参数，是以数组的方式传过来的。
+class saebase
+{
+    public function __call($fun, $args)
+    { //第一次参数是方法名，第二个参数是传过来的参数，是以数组的方式传过来的。
         return false;
     }
 }
 
-class SaeStorage extends saebase {
+class SaeStorage extends saebase
+{
 
 }
 
-class SaeKV extends saebase {
-    
+class SaeKV extends saebase
+{
+
 }
 
-class SaeDeferredJob extends saebase {
-    
+class SaeDeferredJob extends saebase
+{
+
 }

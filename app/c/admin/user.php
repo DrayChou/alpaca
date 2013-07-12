@@ -1,15 +1,18 @@
 <?php
 
-class user extends admin {
+class user extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/user_m');
         if ($this->u['level'] < 20)
             redirect('/', '权限不够');
     }
 
-    function index() {
+    function index()
+    {
         $tot = $this->m->count();
         $psize = 30;
         $param['pagination'] = pagination($tot, seg(3), $psize, '/admin/user/index/');
@@ -17,12 +20,14 @@ class user extends admin {
         $this->display('v/admin/user/list-table', $param);
     }
 
-    function view($id) {
+    function view($id)
+    {
         $param['r'] = $this->m->get($id);
         $this->display('user/show', $param);
     }
 
-    function edit($id) {
+    function edit($id)
+    {
         $conf = array('email' => 'required|email', 'username' => 'required', 'password' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {
@@ -36,7 +41,8 @@ class user extends admin {
         }
     }
 
-    function del($id) {
+    function del($id)
+    {
         if ($id == 1) {
             redirect(BASE . 'admin/user/', '初始账户不能删除！');
             return;
@@ -45,7 +51,8 @@ class user extends admin {
         redirect(BASE . 'admin/user/', '删除成功！');
     }
 
-    function add() {
+    function add()
+    {
         $conf = array('email' => 'required|email|val_dist_email', 'username' => 'required|val_dist_username', 'password' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {

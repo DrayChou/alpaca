@@ -26,7 +26,8 @@ if (isset($_SERVER['SCRIPT_URL']))
     $uri = $_SERVER['SCRIPT_URL'];
 render_url();
 
-function render_url() {
+function render_url()
+{
     // redirect abc/def to abc/def/ to make SEO url 
     global $uri;
     if (strpos($uri, '.'))
@@ -45,7 +46,8 @@ function render_url() {
 //echo ' 去除Magic_Quotes';
 if (get_magic_quotes_gpc()) { // Maybe would be removed in php6
 
-    function stripslashes_deep($value) {
+    function stripslashes_deep($value)
+    {
         $value = is_array($value) ? array_map('stripslashes_deep', $value) : (isset($value) ? stripslashes($value) : null);
         return $value;
     }
@@ -73,10 +75,10 @@ $des_dir = $dir = '';
 
 //echo 'look';
 foreach ($seg as $cur_dir) {
-    $des_dir.=$cur_dir . "/";
+    $des_dir .= $cur_dir . "/";
     if (is_file(APP . 'c' . $des_dir . '__construct.php')) {
         require(APP . 'c' . $des_dir . '__construct.php');
-        $dir .=array_shift($seg) . '/';
+        $dir .= array_shift($seg) . '/';
     } else {
         break;
     }
@@ -107,7 +109,8 @@ call_user_func_array(array(&$B2, $method), array_slice($seg, 3));
  * $instantiate 为数组时，数组内容会作为参数传递给对象 
  */
 
-function &load($path, $instantiate = TRUE) {
+function &load($path, $instantiate = TRUE)
+{
     $param = FALSE;
     if (is_array($instantiate)) {
         $param = $instantiate;
@@ -124,14 +127,14 @@ function &load($path, $instantiate = TRUE) {
     if ($instantiate == FALSE)
         $objects[$object_name] = TRUE;
     elseif ($param)
-        $objects[$object_name] = new $class_name($param);
-    else
+        $objects[$object_name] = new $class_name($param); else
         $objects[$object_name] = new $class_name();
     return $objects[$object_name];
 }
 
 // 取得 url 的片段，如 url 是 /abc/def/g/  seg(1) = abc
-function seg($i) {
+function seg($i)
+{
     global $seg;
     return isset($seg[$i]) ? $seg[$i] : false;
 }
@@ -143,17 +146,18 @@ function seg($i) {
  * $cache = TRUE 时，不像浏览器输出结果，而是以 string 的形式 return
  */
 
-function view($view, $param = array(), $cache = FALSE) {
-    if (!empty($param)){
+function view($view, $param = array(), $cache = FALSE)
+{
+    if (!empty($param)) {
         extract($param);
     }
     ob_start();
 
     if (APP_SERVER == 'sae') {
-        $temp = sae_file( $view, true );
+        $temp = sae_file($view, true);
     }
 
-    if( !empty($temp) ){
+    if (!empty($temp)) {
 
     } else if (is_file(APP . $view . '.php')) {
         require APP . $view . '.php';
@@ -170,8 +174,9 @@ function view($view, $param = array(), $cache = FALSE) {
 }
 
 // 写入日志
-function write_log($level = 0, $content = 'none') {
-    if ( APP_SERVER == 'sae' ) {
+function write_log($level = 0, $content = 'none')
+{
+    if (APP_SERVER == 'sae') {
         sae_debug($content);
     } else {
         file_put_contents(APP . 'log/' . $level . '-' . date('Y-m-d') . '.log', $content, FILE_APPEND);
@@ -179,7 +184,8 @@ function write_log($level = 0, $content = 'none') {
 }
 
 //echo ' 显示404错误';
-function show_404() { //显示 404 错误
+function show_404()
+{ //显示 404 错误
     header("HTTP/1.1 404 Not Found");
     // 调用 模板 v/404.php 
     view('v/404');
@@ -189,26 +195,31 @@ function show_404() { //显示 404 错误
 /*  B2Core 系统类 */
 
 // 抽象的控制器类，建议所有的控制器均基层此类或者此类的子类 
-class c {
+class c
+{
 
-    function index() {
+    function index()
+    {
         echo "基于 B2 v" . VERSION . " 创建";
     }
 
 }
 
 // 数据库操作类
-class db_sqlite {
+class db_sqlite
+{
 
     var $db;
     var $last_query;
 
-    function __construct($conf) {
+    function __construct($conf)
+    {
         $this->db = new SQLite3($conf['default_db']);
     }
 
     //执行 query 查询，如果结果为数组，则返回数组数据
-    function query($query) {
+    function query($query)
+    {
         $ret = array();
         $this->last_query = $query;
         $results = $this->db->query($query);
@@ -220,12 +231,14 @@ class db_sqlite {
         return $ret;
     }
 
-    function insert_id() {
+    function insert_id()
+    {
         return $this->db->lastInsertRowID();
     }
 
     // 执行多条 SQL 语句
-    function muti_query($query) {
+    function muti_query($query)
+    {
         $sq = explode(";\n", $query);
         foreach ($sq as $s) {
             if (trim($s) != '')
@@ -233,18 +246,21 @@ class db_sqlite {
         }
     }
 
-    function escape($str) {
+    function escape($str)
+    {
         return $this->db->escapeString($str);
     }
 
 }
 
-class db_mysql {
+class db_mysql
+{
 
     var $link;
     var $last_query;
 
-    function __construct($conf) {
+    function __construct($conf)
+    {
         $this->link = mysql_connect($conf['host'], $conf['user'], $conf['password']);
         if (!$this->link) {
             die('无法连接: ' . mysql_error());
@@ -259,7 +275,8 @@ class db_mysql {
     }
 
     //执行 query 查询，如果结果为数组，则返回数组数据
-    function query($query) {
+    function query($query)
+    {
         $ret = array();
         $this->last_query = $query;
         $result = mysql_query($query, $this->link);
@@ -277,12 +294,14 @@ class db_mysql {
         return $ret;
     }
 
-    function insert_id() {
+    function insert_id()
+    {
         return mysql_insert_id();
     }
 
     // 执行多条 SQL 语句
-    function muti_query($query) {
+    function muti_query($query)
+    {
         $sq = explode(";\n", $query);
         foreach ($sq as $s) {
             if (trim($s) != '')
@@ -290,32 +309,37 @@ class db_mysql {
         }
     }
 
-    function escape($str) {
+    function escape($str)
+    {
         return mysql_real_escape_string($str);
     }
 
 }
 
 // 模块类，封装了通用CURD模块操作，建议所有模块都继承此类。
-class m {
+class m
+{
 
     var $db;
     var $table;
     var $fields;
     var $key;
 
-    function __construct() {
+    function __construct()
+    {
         global $db;
         $this->db = $db;
         $this->key = 'id';
     }
 
-    public function __call($name, $arg) {
+    public function __call($name, $arg)
+    {
         return call_user_func_array(array($this, $name), $arg);
     }
 
     // 向数据库插入数组格式数据
-    function add($elem = FALSE) {
+    function add($elem = FALSE)
+    {
         $query_list = array();
         if (!$elem)
             $elem = $_POST;
@@ -332,12 +356,14 @@ class m {
     }
 
     // 删除某一条数据
-    function del($id) {
+    function del($id)
+    {
         $this->db->query("delete from `$this->table` where " . $this->key . "='$id'");
     }
 
     // 更新数据
-    function update($id, $elem = FALSE) {
+    function update($id, $elem = FALSE)
+    {
         $query_list = array();
         if (!$elem)
             $elem = $_POST;
@@ -351,7 +377,8 @@ class m {
     }
 
     // 统计数量
-    function count($where = '') {
+    function count($where = '')
+    {
         $res = $this->db->query("select count(*) as a from `$this->table` where 1 $where");
         return $res[0]['a'];
     }
@@ -360,14 +387,16 @@ class m {
      *  get($postquery = '',$cur = 1,$psize = 30) 取得多条数据
      */
 
-    function get() {
+    function get()
+    {
         $args = func_get_args();
         if (is_numeric($args[0]))
             return $this->__call('get_one', $args);
         return $this->__call('get_many', $args);
     }
 
-    function get_one($id) {
+    function get_one($id)
+    {
         $id = is_numeric($id) ? $id : 0;
         $res = $this->db->query("select * from `$this->table` where " . $this->key . "='$id'");
         if (isset($res[0]))
@@ -375,7 +404,8 @@ class m {
         return false;
     }
 
-    function get_many($postquery = '', $cur = 1, $psize = 30) {
+    function get_many($postquery = '', $cur = 1, $psize = 30)
+    {
         $cur = $cur > 0 ? $cur : 1;
         $start = ($cur - 1) * $psize;
         $query = "select * from `$this->table` where 1 $postquery limit $start , $psize";

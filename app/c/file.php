@@ -1,20 +1,24 @@
 <?php
 
-class file extends base {
+class file extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function upload() {
-        if ( APP_SERVER == 'sae' ) {
+    function upload()
+    {
+        if (APP_SERVER == 'sae') {
             $this->upload_sae();
         } else {
             $this->upload_();
         }
     }
 
-    function upload_sae() {
+    function upload_sae()
+    {
         if ($this->u['level'] < 5) {
             alert('权限不够');
         }
@@ -90,7 +94,8 @@ class file extends base {
         }
     }
 
-    function upload_() {
+    function upload_()
+    {
         if ($this->u['level'] < 5)
             alert('权限不够');
         $php_path = '';
@@ -182,15 +187,17 @@ class file extends base {
         }
     }
 
-    function filemanager() {
-        if ( APP_SERVER == 'sae' ) {
+    function filemanager()
+    {
+        if (APP_SERVER == 'sae') {
             $this->filemanager_sae();
         } else {
             $this->filemanager_();
         }
     }
 
-    function filemanager_sae() {
+    function filemanager_sae()
+    {
         if ($this->u['level'] < 5) {
             alert('权限不够');
         }
@@ -235,7 +242,8 @@ class file extends base {
             alert("Parameter is not valid.");
         }
 
-        function digui(&$file_list, $i, $path) {
+        function digui(&$file_list, $i, $path)
+        {
             $stor = new SaeStorage();
             $ret = $stor->getListByPath(SAE_STORAGE_DOMAIN, $path, 1000);
             if ($ret == false) {
@@ -282,7 +290,8 @@ class file extends base {
         digui($file_list, -1, $upload_path);
 
         //排序
-        function cmp_func($a, $b) {
+        function cmp_func($a, $b)
+        {
             global $order;
             if ($a['is_dir'] && !$b['is_dir']) {
                 return -1;
@@ -327,7 +336,8 @@ class file extends base {
         exit;
     }
 
-    function filemanager_() {
+    function filemanager_()
+    {
         if ($this->u['level'] < 5)
             alert('权限不够');
         $php_path = ''; //dirname(__FILE__) . '/';
@@ -411,7 +421,8 @@ class file extends base {
         }
 
         //排序
-        function cmp_func($a, $b) {
+        function cmp_func($a, $b)
+        {
             global $order;
             if ($a['is_dir'] && !$b['is_dir']) {
                 return -1;
@@ -454,20 +465,22 @@ class file extends base {
         exit;
     }
 
-    function thumb($size = 300, $file = '') {
-        if ( APP_SERVER == 'sae' ) {
+    function thumb($size = 300, $file = '')
+    {
+        if (APP_SERVER == 'sae') {
             $this->thumb_sae($size, $file);
         } else {
             $this->thumb_($size, $file);
         }
     }
 
-    function thumb_sae($size = 300, $file = '') {
+    function thumb_sae($size = 300, $file = '')
+    {
         global $seg;
         $file = implode('/', array_slice($seg, 4)); // 原图地址
         $temp = @file_get_contents('saestor://' . SAE_STORAGE_DOMAIN . '/' . $file . '.php');
 
-        if ( empty($temp ) )
+        if (empty($temp))
             return;
         $img = load('lib/img');
         $img->filename = $file;
@@ -478,7 +491,8 @@ class file extends base {
         $img->create();
     }
 
-    function thumb_($size = 300, $file = '') {
+    function thumb_($size = 300, $file = '')
+    {
         global $seg;
         $file = implode('/', array_slice($seg, 4)); // 原图地址
         if (!is_file($file))
@@ -499,7 +513,8 @@ class file extends base {
 
 }
 
-function alert($msg) {
+function alert($msg)
+{
     header('Content-type: text/html; charset=UTF-8');
     echo _encode(array('error' => 1, 'message' => $msg));
     exit;

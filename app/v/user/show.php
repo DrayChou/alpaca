@@ -1,5 +1,4 @@
-
-<table class="table-view  table" cellspacing=0 >
+<table class="table-view  table" cellspacing=0>
     <tr>
         <th>email</th>
         <td><?= $r[email] ?></td>

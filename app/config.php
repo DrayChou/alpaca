@@ -2,7 +2,7 @@
 
 // 所有配置内容都可以在这个文件维护
 //error_reporting(E_ERROR);
-ini_set('display_errors',1);
+ini_set('display_errors', 1);
 
 define('ALPA_VERSION', '3.8');
 // 配置url路由

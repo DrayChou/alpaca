@@ -1,12 +1,15 @@
 <?php
 
-class home extends base {
+class home extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
     }
 
-    function index($sort = 'form') {
+    function index($sort = 'form')
+    {
         if (is_array($_POST)) {
             $_POST['elem_info'] = _encode($_POST);
             $_POST['elem_name'] = $sort;

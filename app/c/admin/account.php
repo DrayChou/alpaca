@@ -1,13 +1,16 @@
 <?php
 
-class account extends admin {
+class account extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/user_m');
     }
 
-    function index() {
+    function index()
+    {
         $id = $this->u['id'];
         $conf = array('email' => 'required|email', 'username' => 'required', 'password' => 'required');
         $err = validate($conf);
@@ -22,7 +25,8 @@ class account extends admin {
         }
     }
 
-    function del($id) {
+    function del($id)
+    {
         if ($id == 1) {
             redirect(BASE . 'admin/user/', '初始账户不能删除！');
             return;
@@ -31,7 +35,8 @@ class account extends admin {
         redirect(BASE . 'admin/user/', '删除成功！');
     }
 
-    function add() {
+    function add()
+    {
         $conf = array('email' => 'required|email|val_dist_email', 'username' => 'required|val_dist_username', 'password' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {

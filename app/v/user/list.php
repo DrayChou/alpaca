@@ -1,4 +1,4 @@
-<ul class="user-list" >
+<ul class="user-list">
     <?php
     if (is_array($records)) {
         foreach ($records as $r) {
@@ -12,11 +12,12 @@
                 <div>级别 <?= $r['level'] ?></div>
                 <div>信息 <?= $r['info'] ?></div>
                 <div>
-                    <a href="/user/view/<?= $r['id'] ?>" >查看</a>
-                    <a href="/user/edit/<?= $r['id'] ?>" >编辑</a> 
+                    <a href="/user/view/<?= $r['id'] ?>">查看</a>
+                    <a href="/user/edit/<?= $r['id'] ?>">编辑</a>
                 </div>
             </li>
-        <?php }
+        <?php
+        }
     }
     ?>
 </ul>

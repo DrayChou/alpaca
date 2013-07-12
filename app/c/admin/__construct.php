@@ -1,8 +1,10 @@
 <?php
 
-class admin extends base {
+class admin extends base
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         if (!$this->u['id']) {
             redirect(BASE . 'login/?rtu=' . BASE . 'admin/', "请先登录");
@@ -11,7 +13,8 @@ class admin extends base {
             redirect(BASE, '权限不够');
     }
 
-    function display($view, $param = array()) {
+    function display($view, $param = array())
+    {
         header("Content-type: text/html; charset=utf-8");
         $param['u'] = $this->u;
         $param['menu'] = array('home' => '首页',
@@ -24,7 +27,7 @@ class admin extends base {
             '../logout' => '退出'
         );
 
-        if ($this->u['level'] > 10){
+        if ($this->u['level'] > 10) {
             $param['menu']['user'] = '用户';
         }
 

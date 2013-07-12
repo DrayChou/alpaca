@@ -1,9 +1,11 @@
 <?
 
-class example_m extends m {
+class example_m extends m
+{
 
 // 模块中类的命名必须为 文件名加 _m 结尾
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->table = 'example';
         // 模块调用的表名

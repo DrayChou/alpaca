@@ -2,9 +2,11 @@
 
 load('lib/utility', false);
 
-class base extends c {
+class base extends c
+{
 
-    function __construct() {
+    function __construct()
+    {
         global $db_config, $var;
         if (isset($db_config)) {
             $this->u = load('m/user_m')->check();
@@ -12,7 +14,8 @@ class base extends c {
         }
     }
 
-    function display($view, $param = array()) {
+    function display($view, $param = array())
+    {
         $param['al_content'] = view($view, $param, TRUE);
         header("Content-type: text/html; charset=utf-8");
         view('tmp/template', $param);
@@ -22,10 +25,12 @@ class base extends c {
 
 /* 显示面包屑 */
 
-class alpa {
+class alpa
+{
 
     // 生成 Tag 列表
-    static function tags($layout_name = 'list') {
+    static function tags($layout_name = 'list')
+    {
         $list = load('m/elem_m')->tags();
         $al_list = array();
         foreach ($list as $l) {
@@ -35,14 +40,16 @@ class alpa {
         return view('tmp/' . $layout_name, array('pages' => $al_list), TRUE);
     }
 
-    static function tag($tagname, $page_size = 10, $layout_name = 'list') {
+    static function tag($tagname, $page_size = 10, $layout_name = 'list')
+    {
         $eurl = urlencode($tagname);
         $where = " and id in ( select rel_id from elem where `mod`='tag' and elem_name='$eurl' )";
         return alpa::showlist($where, $page_size = 10, $layout_name);
     }
 
     // 生成面包屑
-    static function breadcrumb() {
+    static function breadcrumb()
+    {
         global $rel_id;
         $id = $rel_id ? $rel_id : 0;
         $dir = alpa('dir');
@@ -57,7 +64,8 @@ class alpa {
     }
 
     // 获取各种列表
-    static function showlist($condition, $page_size = 10, $layout_name = 'list') {
+    static function showlist($condition, $page_size = 10, $layout_name = 'list')
+    {
         $page_size = $page_size > 0 ? $page_size : 10;
         $list = load('m/elem_m')->get($condition, 0, $page_size);
         $al_list = array();
@@ -73,20 +81,23 @@ class alpa {
         return view($layout, $param, TRUE);
     }
 
-    static function muti($elem, $num, $layout_name) {
+    static function muti($elem, $num, $layout_name)
+    {
         $condition = " and  rel_id in (select id from elem where elem_name = '$elem' and `mod` = 'page') order by post_time desc";
         return alpa_list($condition, $num, $layout_name);
     }
 
     // 显示分类
-    static function cate($cate, $page_size = 10, $layout_name = 'list_layout') {
+    static function cate($cate, $page_size = 10, $layout_name = 'list_layout')
+    {
         $cate = addslashes($cate);
         return alpa_list(" and rel_id in ( select id from elem where elem_name = '$cate' ) and `mod`='dir' ", $page_size, $layout_name);
     }
 
 }
 
-function alpa($key, $page_size = 10, $layout_name = 'list_layout') {
+function alpa($key, $page_size = 10, $layout_name = 'list_layout')
+{
     $key = trim($key);
     $page_size = $page_size + 0;
     //变量
@@ -107,9 +118,9 @@ function alpa($key, $page_size = 10, $layout_name = 'list_layout') {
                 $class = ' class="first" ';
             if ($_SERVER['REQUEST_URI'] == $l['link'])
                 $class = ' class="current" ';
-            $out.= '<li ' . $class . ' ><a href="' . (isset($l['base']) ? BASE : '') . $l['link'] . '" ';
-            $out.=isset($l['blank']) ? 'target="_blank"' : '';
-            $out.=' ><span>' . $l['label'] . '</span></a></li>';
+            $out .= '<li ' . $class . ' ><a href="' . (isset($l['base']) ? BASE : '') . $l['link'] . '" ';
+            $out .= isset($l['blank']) ? 'target="_blank"' : '';
+            $out .= ' ><span>' . $l['label'] . '</span></a></li>';
         }
         return $out;
     }
@@ -126,12 +137,14 @@ function alpa($key, $page_size = 10, $layout_name = 'list_layout') {
     return "<div class=\"alert\" >警告： $key 不存在</div>";
 }
 
-function child_dir($id) {
+function child_dir($id)
+{
     $tree = alpa('tree');
     return catids($id, $tree);
 }
 
-function catids($id, $tree) {
+function catids($id, $tree)
+{
     if (!isset($tree[$id]))
         return;
     foreach ($tree[$id] as $li) {

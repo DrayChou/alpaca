@@ -13,27 +13,29 @@
   +--------------------------------------------------------------------------
  */
 
-Class img {
+Class img
+{
 
     var $input_type = ""; //输入图片的格式
     var $output_type = ""; //输出图片的格式
-    var $limit = 0;  //图片大小限制
+    var $limit = 0; //图片大小限制
     var $limit_w = 0;
     var $limit_h = 0;
-    var $filename = "";  //输入图片的文件名(也可以直接是图片数据)
+    var $filename = ""; //输入图片的文件名(也可以直接是图片数据)
     var $file_tmp_name = "";
     var $jpeg_quality = 90; //jpeg图片质量
-    var $save_file = '';  //输出文件名
-    var $wm_text = "";  //水印文字( 不支持中文:'( )
+    var $save_file = ''; //输出文件名
+    var $wm_text = ""; //水印文字( 不支持中文:'( )
     var $wm_size = 50; //水印文字大小
     var $wm_angle = 0; //水印文字角度
-    var $wm_x = 50;  //水印x坐标
-    var $wm_y = 50;  //水印y坐标
+    var $wm_x = 50; //水印x坐标
+    var $wm_y = 50; //水印y坐标
     var $wm_color = "#cccccc"; //水印颜色
     var $wm_fontfile = "geodesic.ttf"; //水印字体文件
     var $display = false; // 生成后显示图片
 
-    function upload($file = FALSE) { // 将上传文件生成缩略图 。
+    function upload($file = FALSE)
+    { // 将上传文件生成缩略图 。
         if ($file) {
             $this->filename = $file['name'];
             $this->file_tmp_name = $file['tmp_name'];
@@ -41,7 +43,8 @@ Class img {
         $this->create();
     }
 
-    function create() { //生成缩略图
+    function create()
+    { //生成缩略图
         if ($this->limit != 0) {
             $this->limit_w = $this->limit_h = $this->limit;
         }
@@ -124,7 +127,7 @@ Class img {
             switch ($this->output_type) {
                 case 'gif':
                     if (APP_SERVER == 'sae') {
-                        $src_img = ImagePNG($dst_img, SAE_TMP_PATH . $this->save_file);//保存为临时文件
+                        $src_img = ImagePNG($dst_img, SAE_TMP_PATH . $this->save_file); //保存为临时文件
                     } else {
                         $src_img = ImagePNG($dst_img, $this->save_file);
                     }
@@ -155,7 +158,7 @@ Class img {
                     break;
             }
 
-            file_put_contents('saestor://s02/'.$this->save_file, file_get_contents(SAE_TMP_PATH.$this->save_file));
+            file_put_contents('saestor://s02/' . $this->save_file, file_get_contents(SAE_TMP_PATH . $this->save_file));
         }
 
         if ($this->display) {
@@ -181,7 +184,8 @@ Class img {
         imagedestroy($dst_img);
     }
 
-    function get_type() {//获取图像文件类型
+    function get_type()
+    { //获取图像文件类型
         $this->filename = strtolower($this->filename);
         if (preg_match("/\.(pjpeg|jpg|jpeg|gif|png)$/", $this->filename, $matches)) {
             $this->input_type = strtolower($matches[1]);

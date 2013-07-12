@@ -1,13 +1,16 @@
 <?php
 
-class model extends admin {
+class model extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/elem_m');
     }
 
-    function index() {
+    function index()
+    {
         $tot = $this->m->count(" and `mod`='model' ");
         $psize = 30;
         $pcurrent = isset($_GET['p']) ? $_GET['p'] : 0;
@@ -16,7 +19,8 @@ class model extends admin {
         $this->display('v/admin/model/list-table', $param);
     }
 
-    function add() {
+    function add()
+    {
         $conf = array('title' => 'required', 'title_label' => 'required');
         $err = validate($conf);
         if ($err === TRUE) {
@@ -31,7 +35,8 @@ class model extends admin {
         }
     }
 
-    function edit($id) {
+    function edit($id)
+    {
         $conf = array('title' => 'required', 'title_label' => 'required');
         $err = validate($conf);
         if (is_array($err)) {
@@ -48,7 +53,8 @@ class model extends admin {
         redirect(BASE . 'admin/model/', '修改成功！');
     }
 
-    function template($id) {
+    function template($id)
+    {
         $v = $this->m->get($id);
         $info = _decode($v['elem_info'], true);
         $model_layout = '';
@@ -56,9 +62,9 @@ class model extends admin {
             foreach ($info['fields'] as $m) {
                 switch ($m['model']) {
                     case 'pic':
-                        $model_layout .='<div>' . $m['label'] . ': <img src="<?=$' . $m['name'] . '?>" /> </div>';
+                        $model_layout .= '<div>' . $m['label'] . ': <img src="<?=$' . $m['name'] . '?>" /> </div>';
                     default:
-                        $model_layout .='<div>' . $m['label'] . ': <?=$' . $m['name'] . '?> </div>';
+                        $model_layout .= '<div>' . $m['label'] . ': <?=$' . $m['name'] . '?> </div>';
                 }
             }
         }
@@ -76,7 +82,7 @@ foreach ($records as $r ){ ?>
         //  $nid = $this->m->add(array('elem_name'=>$v['title'],'mod'=>'layout','elem_info'=>$layout , 'post_time'=>time(), 'update_time'=>time()));
         $fname = $v['title'] . '.php';
 
-        if ( APP_SERVER == 'sae' ) {
+        if (APP_SERVER == 'sae') {
             file_put_contents('saekv://tmp/' . $fname, $layout);
             file_put_contents('saestor://' . SAE_STORAGE_DOMAIN . '/tmp/' . $fname, $layout);
         } else {
@@ -85,12 +91,14 @@ foreach ($records as $r ){ ?>
         redirect(BASE . 'admin/template/index/' . $fname . '/', '成功创建排板！');
     }
 
-    function del($id) {
+    function del($id)
+    {
         $this->m->del($id);
         redirect(BASE . 'admin/model/', '删除成功！');
     }
 
-    function arrange($arr) {
+    function arrange($arr)
+    {
         // clear empty fields
         $narr = array();
         foreach ($arr as $a) {

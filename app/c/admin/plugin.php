@@ -1,8 +1,10 @@
 <?php
 
-class plugin extends admin {
+class plugin extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->plugin = alpa('plugin');
         if (!is_array($this->plugin))
@@ -10,7 +12,8 @@ class plugin extends admin {
         //print_r($this->plugin);
     }
 
-    function index() {
+    function index()
+    {
         $file = array();
         $base_dir = APP . "plugin/";
         $fso = opendir($base_dir);
@@ -22,26 +25,30 @@ class plugin extends admin {
         $this->display('v/admin/plugin/index', $param);
     }
 
-    function view($package, $method = 'index', $param1 = '') {
+    function view($package, $method = 'index', $param1 = '')
+    {
         $home = load('plugin/' . $package . '/c/admin/home');
         $home->$method($param1);
     }
 
-    function install($package) {
+    function install($package)
+    {
         $this->plugin[] = $package;
         load('m/elem_m')->setting('plugin', $this->plugin, 'system');
         $this->rebuild_config();
         redirect(ADMIN_BASE . 'plugin/index/', '安装成功');
     }
 
-    function remove($package) {
+    function remove($package)
+    {
         $this->plugin = array_diff($this->plugin, array($package));
         load('m/elem')->setting('plugin', $this->plugin, 'system');
         $this->rebuild_config();
         redirect(ADMIN_BASE . 'plugin/index/', '安装成功');
     }
 
-    function rebuild_config() {
+    function rebuild_config()
+    {
         $plugin = $this->plugin;
         $content = '<?';
         foreach ($plugin as $p) {
@@ -49,8 +56,8 @@ class plugin extends admin {
       ';
         }
 
-        if ( APP_SERVER == 'sae' ) {
-            file_put_contents('saekv://config_app.php',$content);
+        if (APP_SERVER == 'sae') {
+            file_put_contents('saekv://config_app.php', $content);
         } else {
             file_put_contents(APP . 'config_app.php', $content);
         }

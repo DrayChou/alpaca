@@ -1,13 +1,16 @@
 <?php
 
-class elem extends admin {
+class elem extends admin
+{
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
         $this->m = load('m/elem_m');
     }
 
-    function index() {
+    function index()
+    {
         $tot = $this->m->count();
         $psize = 30;
         $pcurrent = isset($_GET['p']) ? $_GET['p'] : 0;
@@ -16,7 +19,8 @@ class elem extends admin {
         $this->display('elem/list-table', $param);
     }
 
-    function del($id) {
+    function del($id)
+    {
         $this->m->elem_del($id);
         $this->cachedir();
         redirect(BASE . 'admin/page/', '删除成功！');

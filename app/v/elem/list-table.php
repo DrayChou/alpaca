@@ -1,4 +1,4 @@
-<table class="elem-list-table table-list table" cellspacing=0 >
+<table class="elem-list-table table-list table" cellspacing=0>
     <?php if (is_array($records)) { ?>
         <tr>
             <th>标题</th>
@@ -26,11 +26,12 @@
                 <td><?= $r['user_name'] ?></td>
                 <td><?= $r['order_by'] ?></td>
                 <td>
-                    <a href="/elem/view/<?= $r['id'] ?>" >查看</a>
-                    <a href="/elem/edit/<?= $r['id'] ?>" >编辑</a> 
+                    <a href="/elem/view/<?= $r['id'] ?>">查看</a>
+                    <a href="/elem/edit/<?= $r['id'] ?>">编辑</a>
                 </td>
             </tr>
-        <?php }
+        <?php
+        }
     }
     ?>
 </table>

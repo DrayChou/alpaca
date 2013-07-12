@@ -1,4 +1,4 @@
-<ul class="elem-list" >
+<ul class="elem-list">
     <?php
     if (is_array($records)) {
         foreach ($records as $r) {
@@ -16,11 +16,12 @@
                 <div>用户 <?= $r['user_name'] ?></div>
                 <div>排序 <?= $r['order_by'] ?></div>
                 <div>
-                    <a href="/elem/view/<?= $r['id'] ?>" >查看</a>
-                    <a href="/elem/edit/<?= $r['id'] ?>" >编辑</a> 
+                    <a href="/elem/view/<?= $r['id'] ?>">查看</a>
+                    <a href="/elem/edit/<?= $r['id'] ?>">编辑</a>
                 </div>
             </li>
-        <?php }
+        <?php
+        }
     }
     ?>
 </ul>
